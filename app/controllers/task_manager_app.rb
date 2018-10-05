@@ -7,6 +7,14 @@ class TaskManagerApp < Sinatra::Base
     erb :dashboard
   end
 
+  get '/easteregg' do
+    erb :easteregg
+  end
+  
+  get '/showmethetasks' do
+    redirect '/tasks'
+  end
+
   get '/tasks' do
     @tasks = Task.all
     erb :index
@@ -33,11 +41,11 @@ class TaskManagerApp < Sinatra::Base
   end
 
   set :method_override , true
-  puts '/tasks/:id' do |id|
+  put '/tasks/:id' do |id|
     Task.update(id.to_i, params[:task])
     redirect "/tasks/#{id}"
   end
-  
+
   delete '/tasks/:id' do |id|
     Task.destroy(id.to_i)
     redirect '/tasks'

@@ -7,6 +7,14 @@ class TaskManagerApp < Sinatra::Base
     erb :dashboard
   end
 
+  get '/easteregg' do
+    erb :easteregg
+  end
+  
+  get '/showmethetasks' do
+    redirect '/tasks'
+  end
+
   get '/tasks' do
     @tasks = Task.all
     erb :index
